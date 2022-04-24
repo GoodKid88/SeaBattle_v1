@@ -24,24 +24,24 @@ public class Game {
         int counter = 0;
         while (counter < 10) {
             if (counter == 0) {
-                shipsName = " четырехпалубного";
-                format = "(формат: x,y;x,y;x,y;x,y)";
+                shipsName = " four-deck";
+                format = "(format: x,y;x,y;x,y;x,y)";
             }
             if (counter == 1 || counter == 2) {
-                shipsName = " трехпалубного";
-                format = "(формат: x,y;x,y;x,y)";
+                shipsName = " three-deck";
+                format = "(format: x,y;x,y;x,y)";
 
             } else if (counter == 3 || counter == 4 || counter == 5) {
-                shipsName = " двухпалубного";
-                format = "(формат: x,y;x,y)";
+                shipsName = " two-deck";
+                format = "(format: x,y;x,y)";
 
             } else if (counter == 6 || counter == 7 || counter == 8 || counter == 9) {
-                shipsName = " однопалубного";
-                format = "(формат: x,y)";
+                shipsName = " one-deck";
+                format = "(format: x,y)";
 
             }
             try {
-                System.out.println("Введите координаты" + shipsName + " корабля" + format);
+                System.out.println("Please, enter the coordinates" + shipsName + " of ship" + format);
                 String line = scanner.nextLine();
                 String[] coordinates = line.split(("[.,:;()?!\"\\s–]+"));
 
@@ -52,23 +52,23 @@ public class Game {
                         player.getOwnFild().addOreol(ship);
                         counter++;
                     } else {
-                        System.out.println("Ячейки заняты");
+                        System.out.println("Cells are occupied");
                     }
                 } else {
-                    System.out.println("Корабль не валидный!!!");
+                    System.out.println("The ship is not valid!!!");
                 }
             } catch (NumberFormatException ex) {
-                System.out.println("Неверный формат!");
+                System.out.println("Incorrect format!");
             }
         }
     }
 
 
     public void startGame() {
-        System.out.println("Начнем расставлять корабли на поле " + player1.getName() + "! Другой игрок, не смотри!");
+        System.out.println("Let's start placing ships " + player1.getName() + " ! " + player2.getName() + " don't look!");
         addAllShips(player1);
 
-        System.out.println("Начнем расставлять корабли на поле " + player2.getName() + "! Другой игрок, не смотри!");
+        System.out.println("Let's start placing ships " + player2.getName() + " ! " + player1.getName() + " don't look!");
         addAllShips(player2);
 
         player1.getOwnFild().showFild();
@@ -77,14 +77,14 @@ public class Game {
         player2.getOwnFild().showFild();
         System.out.println();
 
-        System.out.println("Корабли расставлены! Бой начинается!");
+        System.out.println("The ships hve been placed! The battle begins!");
         while (true) {
             while (player1.isShotResult()) {
                 if (player2.isAlivedShip()) {
-                    System.out.println(player1.getName() + " Выиграл!");
+                    System.out.println(player1.getName() + " Won!");
                     break;
                 } else {
-                    System.out.println(player1.getName() + " Твой ход");
+                    System.out.println(player1.getName() + " your turn");
                     player1.attack(player2, scanner.nextInt(), scanner.nextInt());
                 }
             }
@@ -93,10 +93,10 @@ public class Game {
 
             while (player2.isShotResult()) {
                 if (player1.isAlivedShip()) {
-                    System.out.println(player2.getName() + " Выиграл!");
+                    System.out.println(player2.getName() + " Won!");
                     break;
                 } else {
-                    System.out.println(player2.getName() + " Твой ход");
+                    System.out.println(player2.getName() + " your turn");
                     player2.attack(player1, scanner.nextInt(), scanner.nextInt());
                 }
             }
